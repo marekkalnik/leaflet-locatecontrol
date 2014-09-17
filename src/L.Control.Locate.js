@@ -311,7 +311,7 @@ L.Control.Locate = L.Control.extend({
 
 			var t = self.options.strings.popup;
             if (self.options.showPopup && t) {
-              self._marker.bindPopup(L.Util.template(t, {distance: distance, unit: unit}))
+              self._innerMarker.bindPopup(L.Util.template(t, {distance: distance, unit: unit}))
                   ._popup.setLatLng(self._event.latlng);
             }
 
@@ -396,6 +396,7 @@ L.Control.Locate = L.Control.extend({
         // event hooks
         map.on('locationfound', onLocationFound, self);
         map.on('locationerror', onLocationError, self);
+        map.on('unload', stopLocate, self);
 
         // make locate functions available to outside world
         this.locate = locate;
